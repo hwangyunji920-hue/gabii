@@ -1,0 +1,244 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>나의 직업 관심 설문 (Copy)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap">
+<style>
+/* layout: one narrow column, three steps (관심도 그리드 → 순위 고르기 → 결과), 만다라트의 살구·연두·하늘 3색을 줄무늬로 이어 씀 */
+:root{
+  --bg:#f6f8fb; --card:#ffffff; --fg:#23303d; --muted:#647384; --line:#d9e0e8;
+  --accent:#1f6f8b; --on-accent:#ffffff;
+  --t0:#fde9d9; --t1:#e2efd9; --t2:#deeaf6; --gold:#f2b632;
+  --display:"Jua","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --body:"Gowun Dodum","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#141a21; --card:#1c242d; --fg:#e8eef4; --muted:#9aa9b8; --line:#33404d;
+  --accent:#6cc3de; --on-accent:#0e1a21;
+  --t0:#4a3a2c; --t1:#33442b; --t2:#2b3d50; --gold:#f2b632; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#141a21; --card:#1c242d; --fg:#e8eef4; --muted:#9aa9b8; --line:#33404d;
+  --accent:#6cc3de; --on-accent:#0e1a21;
+  --t0:#4a3a2c; --t1:#33442b; --t2:#2b3d50; --gold:#f2b632; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5;padding-inline:16px;padding-block:24px 48px}
+main{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+h1{font-family:var(--display);font-weight:400;font-size:30px;margin:0;text-wrap:balance}
+h2{font-family:var(--display);font-weight:400;font-size:21px;margin:0}
+p{margin:0;color:var(--muted)}
+.steps{display:flex;gap:8px;list-style:none;padding:0;margin:0;font-size:14px}
+.steps li{padding:4px 12px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
+.steps li.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+section{display:flex;flex-direction:column;gap:14px}
+.tablewrap{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th,td{padding:7px 2px;text-align:center}
+thead th{font-size:12px;font-weight:400;color:var(--muted);background:var(--card);border-bottom:1px solid var(--line);line-height:1.2}
+thead th b{display:block;font-family:var(--display);font-weight:400;font-size:16px;color:var(--fg)}
+th.nm{width:50%;text-align:left;padding-left:12px;font-weight:400;font-size:15px;line-height:1.3}
+th.nm small{color:var(--muted);font-variant-numeric:tabular-nums;margin-right:4px}
+tr.g0>*{background:var(--t0)} tr.g1>*{background:var(--t1)} tr.g2>*{background:var(--t2)}
+tbody tr.sep>*{border-top:2px solid var(--card)}
+input[type=radio]{appearance:none;width:26px;height:26px;border-radius:50%;border:2px solid var(--muted);background:var(--card);margin:0;cursor:pointer;vertical-align:middle}
+input[type=radio]:checked{border-color:var(--accent);background:radial-gradient(var(--accent) 0 45%,var(--card) 50%)}
+input:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.bar{position:sticky;bottom:calc(8px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:12px;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.bar span{font-size:14px;color:var(--muted);min-width:0}
+button{font-family:var(--display);font-size:17px;border:0;border-radius:10px;padding:10px 20px;background:var(--accent);color:var(--on-accent);cursor:pointer}
+button:disabled{opacity:.4;cursor:not-allowed}
+button.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.pick{font-family:var(--body);font-size:15px;text-align:left;background:var(--card);color:var(--fg);border:2px solid var(--line);padding:10px 12px;display:flex;gap:8px;align-items:center;min-width:0}
+.pick i{flex:none;width:30px;height:30px;border-radius:50%;border:2px dashed var(--muted);display:grid;place-items:center;font-style:normal;font-family:var(--display);font-size:16px}
+.pick.sel{border-color:var(--accent)} .pick.sel i{border:0;background:var(--gold);color:#23303d}
+.pick em{font-style:normal;color:var(--muted);font-size:12px;display:block}
+.top3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.rank{border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.rank .n{font-family:var(--display);font-size:15px;color:var(--muted)}
+.rank .t{font-family:var(--display);font-size:21px;line-height:1.25}
+.rank ul{margin:2px 0;padding-left:18px;font-size:14px}
+.rank .j{font-size:13.5px;color:var(--muted)}
+.chip{display:inline-block;border:1px solid var(--muted);border-radius:99px;padding:0 8px;margin:2px 4px 2px 0;color:var(--fg);font-size:13px}
+.chip.re{border-color:var(--gold);background:var(--gold);color:#23303d}
+.resil{background:var(--card);border:2px solid var(--gold);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.resil ul{margin:0;padding-left:20px}
+.rank .j b{margin-right:4px;color:var(--fg);font-weight:400;font-family:var(--display)}
+.scores{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;grid-template-columns:minmax(0,11em) 1fr 3.2em;gap:6px 10px;align-items:center;font-size:14px}
+.scores .b{height:12px;border-radius:6px;background:var(--accent)}
+.scores .v{font-variant-numeric:tabular-nums;text-align:right;color:var(--muted)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#copied{font-size:14px;color:var(--muted)}
+@media (max-width:480px){ th.nm{width:48%;font-size:13.5px;padding-left:8px} thead th{font-size:10.5px} input[type=radio]{width:24px;height:24px} h1{font-size:26px} }
+</style>
+<main>
+  <header style="display:flex;flex-direction:column;gap:10px">
+    <h1>나는 어떤 일에 끌릴까?</h1>
+    <ol class="steps"><li id="s1" class="on">① 나 살펴보기</li><li id="s2">② 순위 고르기</li><li id="s3">③ 결과</li></ol>
+  </header>
+
+  <section id="p1">
+    <p>평소의 내 모습을 떠올리며 한 줄에 하나씩 골라 보세요. 정답은 없어요. 되고 싶은 모습이 아니라 <b>지금의 나</b>와 얼마나 비슷한지 솔직하게 표시하면 됩니다.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th class="nm">나는…</th><th><b>1</b>전혀<br>아니에요</th><th><b>2</b>아니<br>에요</th><th><b>3</b>보통<br>이에요</th><th><b>4</b>그래요</th><th><b>5</b>매우<br>그래요</th></tr></thead>
+      <tbody id="grid"></tbody>
+    </table></div>
+    <div class="bar"><button class="ghost" id="prev">이전</button><span id="cnt"></span><button id="next" disabled>다음</button></div>
+  </section>
+
+  <section id="p2" hidden>
+    <h2>가장 끌리는 분야 3개를 순서대로 눌러 보세요</h2>
+    <p>내 답을 모아 보니 이 분야들과 잘 맞는 것으로 나왔어요. 처음 누른 것이 1순위, 그다음이 2순위, 3순위가 됩니다. 다시 누르면 취소돼요.</p>
+    <div class="picks" id="picks"></div>
+    <div class="bar"><button class="ghost" id="back1">이전</button><span id="pcnt"></span><button id="to3" disabled>결과 보기</button></div>
+  </section>
+
+  <section id="p3" hidden>
+    <h2 id="rtitle">나의 직업 관심 순위</h2>
+    <div class="top3" id="top3"></div>
+    <div class="resil">
+      <h2>모든 직업에 필요한 힘, 회복 탄력성</h2>
+      <p>회복 탄력성은 실패하거나 실수해도 다시 일어서는 마음의 힘이에요. 어떤 직업이든 처음부터 잘하는 사람은 없고, 넘어졌다가 다시 해 본 사람이 결국 잘하게 됩니다.</p>
+      <ul><li>잘 안 될 때 "못 해" 대신 "<b>아직</b> 못 해"라고 말해 보기</li><li>실수한 뒤에 배운 점 한 가지 찾아보기</li><li>혼자 힘들 때는 친구나 선생님께 도움 청하기</li></ul>
+    </div>
+    <p>내가 '그래요'라고 답한 모습과 그 분야의 대표 직업이에요. 만다라트 학습지에서 같은 분야를 찾아 더 살펴보세요.</p>
+    <h2>24개 분야 전체 점수 (100점 만점)</h2>
+    <div class="scores" id="scores"></div>
+    <div class="row"><button id="copy">결과 복사하기</button><button class="ghost" id="again">처음부터 다시</button><span id="copied" role="status"></span></div>
+  </section>
+</main>
+<script>
+const C=[
+["사업관리",["프로젝트 관리자","행사기획자","해외영업원","경영 컨설턴트","조사전문가","공공행정 사무원"]],
+["경영·회계·사무",["기획·마케팅 사무원","회계사","세무사","인사 사무원","생산·품질 사무원","비서"]],
+["금융·보험",["은행원","자산운용가","투자·신용 분석가","증권·외환 딜러","보험설계사","손해사정사"]],
+["교육·자연·사회과학",["교사","유치원 교사","직업상담사","컴퓨터 강사","대학교수","자연과학 연구원"]],
+["법률·경찰·소방·교도·국방",["변호사","판사·검사","경찰관","소방관","교도관","직업군인"]],
+["보건·의료",["의사","간호사","약사·한약사","물리치료사","치과기공사","응급구조사"]],
+["사회복지·종교",["사회복지사","보육교사","요양보호사","청소년지도사","상담심리사","성직자"]],
+["문화·예술·디자인·방송",["가수·성악가","시각 디자이너","사진작가","영상 편집 기사","방송제작자(PD)","유튜버"]],
+["운전·운송",["항공기 조종사","철도기관사","화물차 운전원","버스·택시 운전원","선장·항해사","관제사"]],
+["영업판매",["제품·광고 영업원","기술영업원","온라인 판매원","상품기획자(MD)","부동산 중개인","매장 판매원"]],
+["경비·청소",["경호원","청원경찰","시설 경비원","무인경비 요원","환경미화원","건물 청소원"]],
+["이용·숙박·여행·오락·스포츠",["미용사","메이크업 아티스트","호텔리어","여행 해설사","스포츠강사","경기심판"]],
+["음식서비스",["한식조리사","양식조리사","중식조리사","일식·복어 조리사","바리스타","외식운영 관리자"]],
+["건설",["건축가","토목공학 기술자","건축 목공","건설배관공","미장공","조경기술자"]],
+["기계",["기계공학 기술자","로봇공학 기술자","자동차 정비원","공업기계 설치·정비원","항공기 정비원","금형원"]],
+["재료",["금속·재료공학 기술자","용접공","도금 조작원","유리 생산기술자","주조원","세라믹 기술자"]],
+["화학·바이오",["생명과학 연구원","화학공학 시험원","플라스틱 생산기술자","석유·가스 제조조작원","화장품 연구원","의약품 연구원"]],
+["섬유·의복",["패션 디자이너","섬유공학 기술자","양장·양복 제조원","패턴사","재단사","재봉사"]],
+["전기·전자",["전기·전자공학 기술자","반도체공학 기술자","내선전기공","외선전기공","발전·배전장치 조작원","전자부품 조립원"]],
+["정보통신",["응용SW 개발자","웹 개발자","정보보안 전문가","데이터 전문가","네트워크 개발자","통신공학 기술자"]],
+["식품가공",["제과·제빵원","식품공학 시험원","곡물가공제품 조작원","정육원","김치·반찬 제조원","음료 제조원"]],
+["인쇄·목재·가구·공예",["인쇄기계 조작원","출판물 전문가","가구 제작·설치원","목제품 제조원","귀금속·보석 세공원","도자기 공예원"]],
+["환경·에너지·안전",["환경공학 기술자","보건위생·환경 검사원","상·하수도 처리장치 조작원","태양광 발전 기술자","산업안전 관리자","에너지공학 기술자"]],
+["농림어업",["작물 재배원","원예작물 재배원","낙농 종사원","임업 종사원","어부·해녀","반려동물 미용·관리사"]]];
+const Q=[
+["모둠 활동에서 계획을 세우고 역할을 나누는 것이 좋다.","행사나 놀이를 준비할 때 할 일을 차례대로 챙기는 편이다."],
+["표나 공책에 숫자와 자료를 꼼꼼하게 정리하는 것이 좋다.","준비물이나 안내장을 빠뜨리지 않고 잘 챙긴다."],
+["용돈을 어떻게 모으고 쓸지 궁리하는 것이 재미있다.","물건값을 비교하고 계산해 보는 일에 금방 빠져든다."],
+["친구에게 모르는 것을 알기 쉽게 설명해 주는 것이 좋다.","궁금한 것이 생기면 책이나 실험으로 끝까지 알아본다."],
+["옳지 않은 일을 보면 그냥 넘기지 못하고 규칙을 따져 본다.","위험한 상황에서 사람들을 지키고 돕는 일을 해 보고 싶다."],
+["다친 친구를 보면 먼저 다가가 돌봐 준다.","우리 몸이 어떻게 움직이고 병이 어떻게 낫는지 궁금하다."],
+["친구의 고민을 끝까지 들어 주는 편이다.","어려운 사람을 돕는 봉사활동을 하면 뿌듯하다."],
+["그리기, 노래, 춤, 영상 만들기를 할 때 시간 가는 줄 모른다.","내 생각을 작품이나 공연으로 보여 주는 것이 좋다."],
+["자동차, 기차, 비행기, 배 같은 탈것에 관심이 많다.","지도를 보고 길을 찾거나 가는 방법을 정하는 것이 재미있다."],
+["알뜰시장에서 물건을 소개하고 파는 것이 재미있다.","처음 만난 사람에게도 말을 잘 걸고 내 생각을 잘 전한다."],
+["주변을 깨끗하게 정리하고 나면 기분이 좋다.","문단속이나 안전을 꼼꼼히 살피는 편이다."],
+["운동 경기나 놀이를 할 때 가장 신난다.","여행 계획을 짜거나 친구의 머리·옷을 꾸며 주는 것이 좋다."],
+["요리를 하거나 간식을 만드는 것이 즐겁다.","내가 만든 음식을 다른 사람이 맛있게 먹으면 기쁘다."],
+["블록이나 상자로 집, 다리 같은 것을 쌓아 만드는 것이 좋다.","건물이 어떻게 지어지는지 공사하는 모습을 유심히 본다."],
+["고장 난 물건을 뜯어 보거나 고쳐 보고 싶다.","로봇이나 기계가 움직이는 원리가 궁금하다."],
+["쇠, 유리, 돌, 흙처럼 물건을 이루는 재료가 무엇인지 궁금하다.","재료를 녹이고 붙이고 굳혀서 무언가를 만드는 일이 재미있다."],
+["과학 실험에서 물질을 섞어 변화를 관찰하는 것이 좋다.","동물, 식물, 작은 생물을 오래 관찰한다."],
+["옷이나 신발의 모양과 옷감을 눈여겨본다.","바느질이나 뜨개질로 무언가 만드는 것이 좋다."],
+["전기 회로를 연결해 불을 켜거나 모터를 돌리는 활동이 재미있다.","전자제품 속이 어떻게 생겼는지 궁금하다."],
+["코딩으로 게임이나 프로그램을 만들어 보고 싶다.","컴퓨터나 스마트폰의 새로운 기능을 금방 익힌다."],
+["과자, 빵, 음료가 공장에서 어떻게 만들어지는지 궁금하다.","식품 포장지의 재료나 유통기한을 살펴보는 편이다."],
+["나무, 찰흙, 종이로 손으로 직접 만드는 것이 좋다.","책이나 포스터를 보기 좋게 꾸미는 것이 재미있다."],
+["분리배출과 에너지 절약을 잘 실천한다.","기후 변화나 환경 문제 소식에 관심이 간다."],
+["식물을 기르거나 동물을 돌보는 것이 좋다.","숲, 바다, 농장 같은 자연 속에서 활동할 때 편안하다."]];
+const V=[
+[["책임","협동"],"여럿이 함께 하는 일을 끝까지 책임지고 힘을 모아요."],
+[["정직","성실"],"숫자와 자료를 속이지 않고 꼼꼼하게 다뤄요."],
+[["정직","신뢰"],"다른 사람의 소중한 돈을 맡는 만큼 믿음을 지켜요."],
+[["존중","인내"],"배우는 사람의 속도를 존중하고 기다려 줘요."],
+[["정의","용기"],"옳은 일을 위해 두려워도 나서요."],
+[["생명 존중","배려"],"아픈 사람의 몸과 마음을 함께 살펴요."],
+[["공감","나눔"],"다른 사람의 어려움을 내 일처럼 느끼고 함께 나눠요."],
+[["창의","끈기"],"나만의 표현을 찾을 때까지 연습을 거듭해요."],
+[["책임","규칙 지키기"],"많은 사람의 안전을 위해 규칙을 꼭 지켜요."],
+[["정직","소통"],"물건을 솔직하게 알리고 상대의 말을 잘 들어요."],
+[["성실","봉사"],"눈에 띄지 않는 곳에서도 맡은 일을 묵묵히 해요."],
+[["친절","공정"],"찾아온 사람을 반갑게 맞고 누구에게나 공평하게 대해요."],
+[["정성","책임"],"먹는 사람을 생각하며 깨끗하고 정성껏 만들어요."],
+[["협동","책임"],"여러 사람과 손발을 맞추고 안전을 끝까지 챙겨요."],
+[["성실","끈기"],"작은 부분까지 꼼꼼히 살피고 될 때까지 고쳐 봐요."],
+[["인내","성실"],"오래 걸리는 과정을 참고 정확하게 해내요."],
+[["정직","생명 존중"],"실험 결과를 있는 그대로 밝히고 생명을 소중히 다뤄요."],
+[["배려","정성"],"입는 사람을 생각하며 한 땀 한 땀 정성을 들여요."],
+[["책임","신중함"],"작은 실수가 사고가 되지 않도록 조심해서 다뤄요."],
+[["정직","소통"],"정보를 바르게 쓰고 함께 만드는 사람들과 생각을 나눠요."],
+[["정직","책임"],"모두가 믿고 먹을 수 있도록 재료와 과정을 속이지 않아요."],
+[["정성","끈기"],"마음에 들 때까지 손으로 다듬고 또 다듬어요."],
+[["책임","공동체 의식"],"나 혼자가 아니라 모두와 다음 세대를 생각해요."],
+[["성실","생명 존중"],"날마다 꾸준히 돌보고 자연과 생명을 아껴요."]];
+const $=id=>document.getElementById(id), nn=i=>String(i+1).padStart(2,'0');
+// 48문항: 분야가 섞이도록 순서를 고르게 흩어 놓음
+// 공통 문장 10개: 여러 분야에 함께 반영되는 나의 성향 [문장, 관련 분야 번호(0부터)]
+const T=[
+["손으로 무언가를 만들거나 조립할 때 집중이 잘 된다.",[12,13,14,15,17,21]],
+["혼자 하는 것보다 여러 사람과 어울려 활동하는 것이 좋다.",[0,3,6,9,11]],
+["숫자를 다루거나 계산하는 문제를 풀 때 재미있다.",[1,2,18,19]],
+["'왜 그럴까?' 궁금하면 까닭을 끝까지 파고든다.",[3,5,15,16,22]],
+["새로운 생각을 떠올려 나만의 방식으로 표현하는 것이 좋다.",[7,17,19,21]],
+["가만히 앉아 있기보다 몸을 움직이며 활동할 때 힘이 난다.",[4,8,10,11,23]],
+["누군가를 도와주고 고맙다는 말을 들을 때 가장 기쁘다.",[3,4,5,6,12]],
+["정해진 순서와 규칙에 따라 차근차근 하는 일이 편하다.",[1,2,4,10,20]],
+["기계나 도구를 다루는 방법을 금방 익힌다.",[8,13,14,18,19]],
+["밖에 나가 자연을 살피고 탐구하는 것이 좋다.",[16,20,22,23]]];
+const NQ=58, PER=12;
+// 문항 id: 0~47은 분야 문장(분야*2+종류), 48~57은 공통 문장. 분야가 섞이도록 흩어 놓고 쪽마다 공통 문장 2개씩 끼움
+const base=[]; for(let k=0;k<2;k++) for(let n=0;n<24;n++) base.push(((n*7+k*5)%24)*2+k);
+const ITEMS=[]; for(let p=0;p<5;p++){const c=base.slice(p*10,p*10+10); c.splice(3,0,48+p*2); c.splice(8,0,49+p*2); ITEMS.push(...c);}
+const PAGES=Math.ceil(NQ/PER);
+const txt=id=>id<48?Q[id>>1][id&1]:T[id-48][0];
+// 배점: 행동 문장 ×3, 관심 문장 ×2, 공통 문장 ×1 → 분야마다 100점 만점으로 환산
+function calc(){return C.map((_,f)=>{let raw=3*ans[f*2]+2*ans[f*2+1], w=5; T.forEach(([,fs],j)=>{if(fs.includes(f)){raw+=ans[48+j]; w++;}}); return Math.round((raw-w)/(w*4)*100);});}
+let ans=Array(NQ).fill(0), score=Array(24).fill(0), order=[], page=0;
+const KEY='job-survey-v3';
+try{const s=JSON.parse(localStorage.getItem(KEY)||'null'); if(s&&s.length===NQ) ans=s;}catch(e){}
+const pageIds=()=>ITEMS.slice(page*PER,page*PER+PER);
+function drawPage(){
+  $('grid').innerHTML=pageIds().map((id,r)=>`<tr class="g${r%3}"><th class="nm" scope="row">${txt(id)}</th>`+[1,2,3,4,5].map(v=>`<td><input type="radio" id="q${id}_${v}" name="q${id}" value="${v}" aria-label="${v}점"${ans[id]==v?' checked':''}></td>`).join('')+'</tr>').join('');
+  $('prev').hidden=page===0; count();
+}
+function count(){const ids=pageIds(), d=ids.filter(i=>ans[i]).length, n=ids.length;
+  $('cnt').textContent=`${page+1} / ${PAGES}쪽 · ${d===n?'모두 표시했어요':`${n}개 중 ${d}개`}`; $('next').disabled=d<n; $('next').textContent=page===PAGES-1?'분야 보기':'다음';}
+$('grid').addEventListener('change',e=>{ans[+e.target.name.slice(1)]=+e.target.value; try{localStorage.setItem(KEY,JSON.stringify(ans))}catch(e){} count();});
+$('prev').onclick=()=>{page--; drawPage(); window.scrollTo(0,0);};
+$('next').onclick=()=>{ if(page<PAGES-1){page++; drawPage(); window.scrollTo(0,0); return;}
+  score=calc(); order=[]; drawPicks(); show(2);};
+drawPage();
+
+function show(n){[1,2,3].forEach(k=>{$('p'+k).hidden=k!==n; $('s'+k).classList.toggle('on',k===n);}); window.scrollTo(0,0);}
+function candidates(){const idx=[...score.keys()].sort((a,b)=>score[b]-score[a]||a-b); const cut=score[idx[2]]; return idx.filter(i=>score[i]>=cut);}
+function drawPicks(){
+  $('picks').innerHTML=candidates().map(i=>{const r=order.indexOf(i);return `<button class="pick${r>=0?' sel':''}" data-i="${i}" aria-pressed="${r>=0}"><i>${r>=0?r+1:''}</i><span>${C[i][0]}<em>${score[i]}점 / 100점</em></span></button>`}).join('');
+  $('pcnt').textContent=`${order.length} / 3`; $('to3').disabled=order.length<3;
+}
+$('picks').addEventListener('click',e=>{const b=e.target.closest('.pick'); if(!b)return; const i=+b.dataset.i, r=order.indexOf(i);
+  if(r>=0) order.splice(r,1); else if(order.length<3) order.push(i); drawPicks();});
+$('back1').onclick=()=>show(1);
+function mine(f){const m=[0,1].filter(k=>ans[f*2+k]>=4).map(k=>Q[f][k]); return m.length?m:Q[f];}
+function ranking(){return [...order, ...[...score.keys()].filter(i=>!order.includes(i)).sort((a,b)=>score[b]-score[a]||a-b)];}
+$('to3').onclick=()=>{
+  $('top3').innerHTML=order.map((i,r)=>`<div class="rank" style="background:var(--t${r})"><span class="n">${r+1}순위 · ${score[i]}점</span><span class="t">${C[i][0]}</span><ul>${mine(i).map(j=>`<li>${j}</li>`).join('')}</ul><span class="j"><b>대표 직업</b> ${C[i][1].join(', ')}</span><span class="j"><b>필요한 인성</b> ${V[i][0].map(x=>`<span class="chip">${x}</span>`).join('')}<span class="chip re">회복 탄력성</span><br>${V[i][1]}</span></div>`).join('');
+  $('scores').innerHTML=ranking().map((i,r)=>`<span>${r<3?`<b>${r+1}순위</b> `:''}${C[i][0]}</span><span><span class="b" style="display:block;width:${score[i]}%"></span></span><span class="v">${score[i]}점</span>`).join('');
+  $('copied').textContent=''; show(3);};
+$('copy').onclick=()=>{
+  const t='[나의 직업 관심 순위]\n'+order.map((i,r)=>`${r+1}순위: ${nn(i)}. ${C[i][0]} (${score[i]}점) / 필요한 인성: ${V[i][0].join(', ')}, 회복 탄력성`).join('\n')+'\n\n[24개 분야 점수 (100점 만점)]\n'+C.map(([n],i)=>`${nn(i)}. ${n}: ${score[i]}점`).join('\n');
+  const ok=()=>$('copied').textContent='복사했어요. 붙여넣기 하면 됩니다.';
+  const fb=()=>{const a=document.createElement('textarea');a.value=t;a.style.cssText='width:100%;height:160px';a.id='copytext';$('p3').append(a);a.select();$('copied').textContent='아래 글을 직접 복사해 주세요.';};
+  try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}};
+$('again').onclick=()=>{ans.fill(0); score.fill(0); order=[]; page=0; try{localStorage.removeItem(KEY)}catch(e){} const a=$('copytext'); if(a)a.remove(); drawPage(); show(1);};
+</script>
+
+</body></html>
